@@ -50,6 +50,7 @@ class Agent():
         self.tau = tau
         self.lr = lr
         self.update_every = update_every
+        self.model = model
 
         # Q-Network
         self.qnetwork_local = QNetwork(state_size, action_size, seed).to(device)
@@ -76,7 +77,7 @@ class Agent():
             # If enough samples are available in memory, get random subset and learn
             if len(self.memory) > self.batch_size:
                 experiences = self.memory.sample()
-                self.learn(experiences, self.gamma)
+                self.learn(experiences)
 
     def act(self, state, eps=0.):
         """Returns actions for given state as per current policy.
@@ -108,12 +109,12 @@ class Agent():
         states, actions, rewards, next_states, dones = experiences
 
         # Get max predicted Q values (for next states) from target model
-        if model='DQN':
+        if self.model=='DQN':
             Q_targets_next = self.qnetwork_target(next_states).detach().max(1)[0].unsqueeze(1)
-        if model='DDQN':
+        if self.model=='DDQN':
             argmax_actions = self.qnetwork_local(next_states).detach().max(1)[1].unsqueeze(1)
             Q_targets_next = self.qnetwork_target(next_states).gather(1, argmax_actions)
-            
+
         # Compute Q targets for current states
         Q_targets = rewards + (self.gamma * Q_targets_next * (1 - dones))
 
