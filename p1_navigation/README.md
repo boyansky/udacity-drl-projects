@@ -22,6 +22,8 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 - **`2`** - turn left.
 - **`3`** - turn right.
 
+The goal is to train an agent that can play and achieve an average score of 13 over 100 consecutive episodes.
+
 ## Getting Started
 
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
