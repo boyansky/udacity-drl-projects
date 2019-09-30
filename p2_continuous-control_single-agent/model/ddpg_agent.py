@@ -62,7 +62,7 @@ class Agent():
         # Replay memory
         self.memory = ReplayBuffer(action_size, self.buffer_size, self.batch_size, random_seed)
 
-    def step(self, state, action, reward, next_state, done):
+    def step(self, state, action, reward, next_state, done, step):
         """Save experience in replay memory, and use random sample from buffer to learn."""
         # Save experience / reward
         self.memory.add(state, action, reward, next_state, done)
@@ -74,7 +74,7 @@ class Agent():
 
     def act(self, state, add_noise=True):
         """Returns actions for given state as per current policy."""
-        state = torch.from_numpy(state).float().to(device)
+        state = torch.from_numpy(state).float().to(device).unsqueeze(0)
         self.actor_local.eval()
         with torch.no_grad():
             action = self.actor_local(state).cpu().data.numpy()
@@ -126,6 +126,8 @@ class Agent():
         # ----------------------- update target networks ----------------------- #
         self.soft_update(self.critic_local, self.critic_target, self.tau)
         self.soft_update(self.actor_local, self.actor_target, self.tau)
+
+        self.noise.reset()
 
     def soft_update(self, local_model, target_model, tau):
         """Soft update model parameters.
