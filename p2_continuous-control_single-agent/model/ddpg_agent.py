@@ -26,7 +26,8 @@ class Agent():
     def __init__(self, state_size, action_size, random_seed,
                  buffer_size=BUFFER_SIZE, batch_size=BATCH_SIZE,
                  gamma=GAMMA, tau=TAU, lr_actor=LR_ACTOR,
-                 lr_critic=LR_CRITIC, weigth_decay=WEIGHT_DECAY):
+                 lr_critic=LR_CRITIC, weigth_decay=WEIGHT_DECAY,
+                 pretrained_actor_weights=None, pretrained_critic_weights=None):
         """Initialize an Agent object.
 
         Params
@@ -55,6 +56,16 @@ class Agent():
         self.critic_local = Critic(state_size, action_size, random_seed).to(device)
         self.critic_target = Critic(state_size, action_size, random_seed).to(device)
         self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=self.lr_critic, weight_decay=self.weight_decay)
+
+        if pretrained_actor_weights:
+            actor_weights = torch.load(pretrained_actor_weights)
+            self.actor_local.load_state_dict(actor_weights)
+            self.actor_target.load_state_dict(actor_weights)
+
+        if pretrained_critic_weights:
+            critic_weights = torch.load(pretrained_critic_weights)
+            self.critic_local.load_state_dict(critic_weights)
+            self.critic_target.load_state_dict(critic_weights)
 
         # Noise process
         self.noise = OUNoise(action_size, random_seed)
