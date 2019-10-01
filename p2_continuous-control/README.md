@@ -38,5 +38,5 @@ The task is episodic, and in order to solve the environment,  your agent must ge
 ### Results
 
 To check the results or trained the agent, open the notebook and the report provided in the folder:
-* `Continuous_Control.ipynb` - DDPG implementation with a single agent
-* `Report.md`
+* [Continuous_Control.ipynb](./Continuous_Control.ipynb) - DDPG implementation with a single agent
+* [Report.md](./Report.md)
