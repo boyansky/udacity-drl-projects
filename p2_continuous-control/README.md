@@ -35,6 +35,30 @@ The task is episodic, and in order to solve the environment,  your agent must ge
 
 2. Place the file in the DRLND GitHub repository, in the `p2_continuous-control/` folder, and unzip (or decompress) the file.
 
+### Dependencies
+
+To set up your python environment to run the code in this repository, follow the instructions below.
+
+1. Create (and activate) a new environment with Python 3.6.
+
+	- __Linux__ or __Mac__:
+	```bash
+	conda create --name drlnd python=3.6
+	source activate drl
+	```
+	- __Windows__:
+	```bash
+	conda create --name drlnd python=3.6
+	activate drl
+	```
+
+2. Clone the Udacity DRL repository and navigate to the `python/` folder.  Then, install several dependencies.
+```bash
+git clone https://github.com/udacity/deep-reinforcement-learning.git
+cd deep-reinforcement-learning/python
+pip install .
+```
+
 ### Results
 
 To check the results or trained the agent, open the notebook and the report provided in the folder:
