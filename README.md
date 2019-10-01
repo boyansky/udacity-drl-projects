@@ -2,3 +2,4 @@
 ## Projects repo
 
 - P1 Navigation
+- P2 Continous Control
