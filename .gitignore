@@ -9,3 +9,5 @@ p1_navigation/*.log
 p1_navigation/model/__pycache__
 p2_continuous-control/Reacher.app
 p2_continuous-control/model/__pycache__
+p3_collab-compet/model/__pycache__
+p3_collab-compet/Tennis.app
