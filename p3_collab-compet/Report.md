@@ -1,7 +1,7 @@
 
 
 # Summary
-The project involved training agents to control rackets in 3d space. The goal for each agent is to bounce a ball over a net and keep the ball playing. Each agentts receives a reward of 0.1 of hitting the ball over the net. In case the ball hits the ground or reaches outside of the bounds, the agent who controls the space or hit the ball respectively receives a reward (penalty) of -0.1.
+The project involved training agents to control rackets in 3d space. The goal for each agent is to bounce a ball over a net, so both agents can keep the ball playing. Each agentts receives a reward of 0.1 of hitting the ball over the net. In case the ball hits the ground or reaches outside of the bounds, the agent who controls the space or hit the ball respectively receives a reward (penalty) of -0.1.
 
 I have successfully implemented extended DDPG (Deep Deterministic Policy Gradient) to multi-agent environment and have reached the project goal.
 
@@ -20,11 +20,11 @@ The objective of the project is to learn a continous action space for multi-agen
 
 To complete the objective of the project, I have tried to extend the implementation Deep Deterministic Policy Gradient ([paper](https://arxiv.org/pdf/1509.02971.pdf)) to multi-agent envirnoment MADDPG ([paper](https://papers.nips.cc/paper/7217-multi-agent-actor-critic-for-mixed-cooperative-competitive-environments.pdf)).
 
-I have extended the framework to shared replay buffer for both agents - so they share and learn from combined experiences. I have used separate actor-critic networks for each agent.
-
-It took me several iterations over the hyperparameters until the agents reached suffessfull learning, although not very stable. 
+I have extended the framework by incorporating shared replay buffer for both agents - so they share and learn from combined experiences. I have implemented separate actor-critic networks for each agent.
 
 As an addition I have added batch normalisation to the network. Before implemting it the traiing wasn' performing well. The problem could have been the computations on large input values and model parameters. Batch normalisation addresses the problem by scaling the features to be within same range by normalising with unit mean and variance.
+
+It took me several iterations over the hyperparameters until the agents reached successful learning, although not very stable.
 
 Implementation of the model is done in `PyTorch`.
 
@@ -43,10 +43,10 @@ Implementation of the model is done in `PyTorch`.
 
 # Results
 
-## DDPG
+## MADDPG
 The agents are trained in 1000 episodes and an average training score of 2.71. Average score of playing with the trained agents is 0.68 over 100 episodes.
 
-![DDPG Results](training_scores.jpg)
+![MADDPG Results](training_scores.jpg)
 
 ## Ideas for future work
 - Add a centralised critic model instead of the current decenralised (separate) for each agent
